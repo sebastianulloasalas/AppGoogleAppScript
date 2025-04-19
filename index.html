@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Crear Tarea</title>
+  <style>
+    body { font-family: sans-serif; max-width: 400px; margin: auto; padding: 20px; }
+    input, button { width: 100%; padding: 10px; margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <h2>Crear nueva tarea</h2>
+  <form id="formTarea">
+    <label>Tarea:</label>
+    <input type="text" id="tarea" required>
+    <label>Fecha límite:</label>
+    <input type="date" id="fecha" required>
+    <button type="submit">Guardar</button>
+  </form>
+  <p id="mensaje"></p>
+
+  
+  <script src="/script.js"></script>
+</body>
+</html>
+
