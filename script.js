@@ -1,28 +1,29 @@
 
-const URL_GAS = "https://script.google.com/a/macros/unsa.edu.pe/s/AKfycbxw6Lwd4skIJtKM2gZkn9sgVBHl7hm8hCT2vTau572m/dev";
+const form = document.getElementById('formTarea');
+const message = document.getElementById('mensaje');
 
-document.getElementById("formTarea").addEventListener("submit", async function(e) {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const tarea = document.getElementById("tarea").value;
-  const fecha = document.getElementById("fecha").value;
+  const tarea = document.getElementById('tarea').value;
+  const fecha = document.getElementById('fecha').value;
 
-  const datos = { tarea, fecha };
+  const data = { tarea, fecha };
 
   try {
-    const res = await fetch(URL_GAS, {
-      method: "POST",
-      headers: { 
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(datos)
+    const response = await fetch('https://script.google.com/macros/s/AKfycbw9jcwa_NIx3JhKoSh0iq1_ZWw_7JjU5zRkHYWR3lysXzQlW7ABy5cfehyhAZVi_E56yQ/exec', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
 
-    const texto = await res.text();
-    document.getElementById("mensaje").textContent = texto;
-    document.getElementById("formTarea").reset();
+    const result = await response.json();
+    message.textContent = result.message || 'Tarea guardada con éxito';
+    form.reset();
   } catch (error) {
-    document.getElementById("mensaje").textContent = "Error al guardar la tarea.";
+    message.textContent = 'Error al guardar la tarea.';
     console.error(error);
   }
 });
